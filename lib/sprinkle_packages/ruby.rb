@@ -1,6 +1,5 @@
 package :ruby do
-  ruby_version = opts[:ruby_version]
-  raise 'You have to specify a ruby version (requires ruby, ruby_version: "some version")'
+  ruby_version = opts[:ruby_version] || ""
   description 'Install ruby #{ruby_version}'
   requires :ruby_dependencies
 
