@@ -6,19 +6,24 @@ A bunch of Sprinkle packages I use
 
 Add this line to your application's Gemfile:
 
-    gem 'sprinkle_packages'
+    gem 'sprinkle_packages', github: 'lasseebert/sprinkle_packages', require: false
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install sprinkle_packages
-
 ## Usage
 
-TODO: Write usage instructions here
+In your sprinkle file:
+
+    require 'sprinkle_packages'
+
+And then use the packages as any other Sprinkle package
+
+    policy :some_policy, :roles => :some_role do
+      requires :ruby, ruby_version: File.read('.ruby-version').strip
+      ...
+    end
 
 ## Contributing
 
