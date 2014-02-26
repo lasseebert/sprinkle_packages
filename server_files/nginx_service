@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+# How-to:
+#
+# Symlink to init.d:
+# ln -s /path/to/nginx_service /etc/init.d/nginx
+#
+# Register service:
+# sudo update-rc.d nginx defaults 99
+# (99 is the boot order of all startup services making sure this boots last)
+#
+
+### BEGIN INIT INFO
+# Provides:          nginx
+# Required-Start:    $local_fs, $syslog
+# Required-Stop:     $local_fs, $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start nginx at boot time
+# Description:       Enable service provided by nginx
+### END INIT INFO
+
+RETVAL=0;
+bin=/opt/nginx/sbin/nginx
+
+start() {
+  echo "Starting nginx"
+  $bin
+}
+
+stop() {
+  echo "Stopping nginx"
+  $bin -s stop
+}
+
+restart() {
+  echo "Restarting nginx"
+  $bin -s reload
+}
+
+reload() {
+  echo "Restarting nginx"
+  $bin -s reload
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  reload)
+    reload
+    ;;
+  *)
+
+    echo $"Usage: $0 {start|stop|restart|reload}"
+    exit 1
+esac
+
+exit $RETVAL
